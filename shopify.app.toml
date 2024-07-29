@@ -1,0 +1,38 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "cba0a4563f63cd25d8ba7a5fe048f239"
+name = "aws-audit-app"
+handle = "aws-audit-app"
+application_url = "https://alternatively-yeah-until-tone.trycloudflare.com"
+embedded = true
+
+[build]
+automatically_update_urls_on_dev = true
+dev_store_url = "checkout-extensibility-test-store-jp.myshopify.com"
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "read_audit_events,read_orders,read_products,write_orders,write_products"
+
+[auth]
+redirect_urls = [
+  "https://alternatively-yeah-until-tone.trycloudflare.com/auth/callback",
+  "https://alternatively-yeah-until-tone.trycloudflare.com/auth/shopify/callback",
+  "https://alternatively-yeah-until-tone.trycloudflare.com/api/auth/callback"
+]
+
+[webhooks]
+api_version = "2024-07"
+
+  [[webhooks.subscriptions]]
+  topics = [
+  "audit_events/admin_api_activity",
+  "orders/create",
+  "products/create",
+  "products/delete"
+]
+  uri = "arn:aws:events:ap-southeast-2::event-source/aws.partner/shopify.com/144477290497/aws-shopify-event-app-2"
+
+[pos]
+embedded = false
